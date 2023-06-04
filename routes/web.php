@@ -1,59 +1,28 @@
 <?php
 
+
 use App\Models\Listing;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ListingController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Common Resource Routes:
+// index - Show all listings
+// show - Show single listing
+// create - Show form to create new listing
+// store - Store new listing
+// edit - Show form to edit listing
+// update - Update listing
+// destroy - Delete listing  
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// // Regular GET
-// Route::get('/hello', function() {
-//     return response('Hello world', 200)
-//     ->header('Content-Type', 'text/plain')
-//     ->header('foo', 'bar');
-// });
-
-// //GET with param and constraints
-// Route::get('/hello/{id}', function($id) {
-//     return response("Post number $id", 200);
-// })->where('id', '[0-9]+');
-
-// Route::get('/search', function(Request $request){
-//     return $request->name . ', '. $request->age;
-// });
 
 // View ALL listing
-Route::get('/listings', function(){
-    $data = [
-        'heading'   => 'All Listings',
-        'listings'  => Listing::all()
-    ];
-    return view('listings', $data);
-});
+Route::get('/', [ListingController::class, 'index']);
 
+// View ALL listing
+Route::get('/listings', [ListingController::class, 'index']);
 
 // View SINGLE listing
-Route::get('/listings/{id}', function($id){
-    
-    $listing = Listing::find($id);
-
-    // echo json_encode($listing);
-
-    return view('listing', [
-        'listing' => $listing
-    ]);
-});
+Route::get('/listings/{listing}', [ListingController::class, 'show']);

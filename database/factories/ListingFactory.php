@@ -9,6 +9,53 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ListingFactory extends Factory
 {
+    private function getTitle() {
+
+        $titles = [
+            'Web Developer',
+            'Software Engineer',
+            'Software Developer',
+            'Front End Developer',
+            'Network Engineer',
+            'Entry Level Software Developer',
+            'Salesforce Developer',
+            'Game Developer',
+            'Programmer',
+            'Data Engineer',
+            'Developer',
+            'Entry Level Developer',
+            'Computer Programmer',
+            'Full Stack Developer',
+            'Junior Software Developer',
+            'Unity Developer',
+            'Machine Learning Engineer',
+            'Junior Front End Developer'
+        ];
+
+        return $titles[array_rand($titles)];
+    }
+    private function getTags() {
+        
+        $frontend = [
+            'React', 'AngularJS', 'JavaScript', 'Angular', 'Bootstrap', 'jQuery', 'HTML, CSS'
+        ];
+
+        $backend = [
+            'Laravel', 'Python', 'PHP', 'JavaScript', 'Java', 'Django', 'Ruby on Rails', 'Ruby'
+        ];
+
+        $db = [
+            'MongoDB', 'Oracle Database', 'MySQL', 'Microsoft SQL Server', 'PostgreSQL', 'IBM Db2', 'MariaDB', 'SQLite', 'Redis',
+        ];
+
+        $tags = [
+            $frontend[array_rand($frontend)],
+            $backend[array_rand($backend)],
+            $db[array_rand($db)]
+        ];
+
+        return implode('=>', $tags);
+    }
     /**
      * Define the model's default state.
      *
@@ -16,18 +63,9 @@ class ListingFactory extends Factory
      */
     public function definition(): array
     {
-        // [
-        //     'title' => 'Full-Stack Engineer',
-        //     'tags' => 'laravel, backend ,api',
-        //     'company' => 'Stark Industries',
-        //     'location' => 'New York, NY',
-        //     'email' => 'email2@email.com',
-        //     'website' => 'https://www.starkindustries.com',
-        //     'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?'
-        // ]
         return [
-            'title' => fake()->sentence(),
-            'tags'  => 'Laravel, Vue.js',
+            'title' => $this->getTitle(),
+            'tags'  => $this->getTags(),
             'company' => fake()->company(),
             'location' => fake()->city(),
             'email' => fake()->companyEmail(),
