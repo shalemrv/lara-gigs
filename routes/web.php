@@ -1,9 +1,6 @@
 <?php
 
 
-use App\Models\Listing;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ListingController;
@@ -23,6 +20,12 @@ Route::get('/', [ListingController::class, 'index']);
 
 // View ALL listing
 Route::get('/listings', [ListingController::class, 'index']);
+
+// Create new Listing
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+// Save new Listing
+Route::post('/listings', [ListingController::class, 'store']);
 
 // View SINGLE listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
